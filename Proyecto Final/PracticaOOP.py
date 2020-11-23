@@ -88,19 +88,23 @@ class MyProgram:
     #end method
 
     def estudianteControl(self, id=0):
-        mat = StringVar()
         cedula = StringVar()
         nom = StringVar()
         apellido = StringVar()
         sex = StringVar()
+        lugarNacimiento = StringVar()
+        mat = StringVar()
+        carrera = StringVar()
+        foto = StringVar()
         filewin = Toplevel(self._master)
         Label(filewin,text = "Cecula").place(x=10, y=30)
         Label(filewin,text = "Nombre").place(x=10, y=60)
         Label(filewin,text = "Apellido").place(x=10, y=90)
         Label(filewin,text = "Sexo").place(x=10, y=120)
-        Label(filewin,text = "Matricula").place(x=10, y=150)
-        
-        canvas = Canvas(filewin, width = 300, height = 300).place(x=310, y=60)     
+        Label(filewin,text = "Localidad").place(x=10, y=150)
+        Label(filewin,text = "Matricula").place(x=10, y=200)
+        Label(filewin,text = "Carrera").place(x=300, y=200)
+           
         img = ImageTk.PhotoImage(Image.open("profileIcon.png"))
         photoLabel = Label(filewin, image = img)
         photoLabel.place(x=320, y=60)
@@ -111,10 +115,14 @@ class MyProgram:
         TxtBoxNombre=Entry(filewin, width=20, textvariable=nom).place(x=100,y=60)
         TxtBoxApellido=Entry(filewin, width=20, textvariable=apellido).place(x=100,y=90)
         TxtBoxSexo=Entry(filewin, width=20, textvariable=sex).place(x=100,y=120)
-        TxtBoxMatricula=Entry(filewin, width=20, textvariable=mat).place(x=100,y=150)
+        TxtBoxLugarNacimiento=Entry(filewin, width=20, textvariable=lugarNacimiento).place(x=100,y=150)
+        TxtBoxMatricula=Entry(filewin, width=20, textvariable=mat).place(x=100,y=200)
+        TxtBoxCarrera=Entry(filewin, width=20, textvariable=carrera).place(x=380,y=200)
         
-        botonInsertar=Button(filewin, text = "Insertar", width= 14, command= lambda:self.insert_estudiante([mat.get(),nom.get(),sex.get()])).place(x=10, y=180)
-        botonInsertar=Button(filewin, text = "Consultar", width= 10, command= lambda:self.estudianteDesdeApi(cedula.get(), [nom,apellido, sex], photoLabel)).place(x=300, y=30)
+
+        
+        botonInsertar=Button(filewin, text = "Insertar", width= 14, command= lambda:self.insert_estudiante([mat.get(),nom.get(),sex.get(), apellido.get(),lugarNacimiento.get(), carrera.get(), cedula.get(), foto.get()])).place(x=10, y=230)
+        botonInsertar=Button(filewin, text = "Consultar", width= 10, command= lambda:self.obtenerDatosConCedula(cedula.get(), [nom,apellido, sex, lugarNacimiento, foto], photoLabel)).place(x=300, y=30)
         #botonModificar=Button(filewin, text = "Modificar", width= 14,).place(x=120, y=120)
         #botonBorrar=Button(filewin, text = "Borrar", width= 14, command= lambda:self.greet()).place(x=60, y=160)
         if id!=0:
@@ -123,31 +131,41 @@ class MyProgram:
             mat.set(data[1])
             nom.set(data[2])
             sex.set(data[3])
+            apellido.set(data[4])
+            lugarNacimiento.set(data[5])
+            carrera.set(data[6])
+            cedula.set(data[7])
+            self.setFotoDesdeUrl(data[8],photoLabel)
+            
         #end condition 
-        filewin.geometry("500x250")
+        filewin.geometry("600x300")
         filewin.mainloop()
     #end method
     
-    def estudianteDesdeApi(self, cedula, inputsFields, photoLabel):        
+    def obtenerDatosConCedula(self, cedula, camposTexto, photoLabel):        
         if(cedula != ""):
             respuestaServicio = Services(cedula).get_datos()
             #manejo de service fail
             if type(respuestaServicio) != str:
                 if "Cedula" in respuestaServicio:
                     print(respuestaServicio)
-                    inputsFields[0].set(respuestaServicio['Nombres'])
-                    inputsFields[1].set(f"{respuestaServicio['Apellido1']} {respuestaServicio['Apellido2']}")
-                    inputsFields[2].set(respuestaServicio['IdSexo'])
-                    print(respuestaServicio["foto"])
+                    camposTexto[0].set(respuestaServicio['Nombres'])
+                    camposTexto[1].set(f"{respuestaServicio['Apellido1']} {respuestaServicio['Apellido2']}")
+                    camposTexto[2].set(respuestaServicio['IdSexo'])
+                    camposTexto[3].set(respuestaServicio['LugarNacimiento'])
+                    #Foto
                     image_url = respuestaServicio["foto"]
-                    raw_data = urllib.request.urlopen(image_url).read()
-                    img = Image.open(io.BytesIO(raw_data))
-                    photo =  ImageTk.PhotoImage(img)
-                    photoLabel.config(image=photo)
-                    photoLabel.photo = photo
-                    #image = ImageTk.PhotoImage(im)
+                    camposTexto[4].set(image_url)
+                    self.setFotoDesdeUrl(image_url,photoLabel)
+                    
+                    
   
-            
+    def setFotoDesdeUrl(self, url, photoLabel):
+        raw_data = urllib.request.urlopen(url).read()
+        img = Image.open(io.BytesIO(raw_data))
+        photo =  ImageTk.PhotoImage(img)
+        photoLabel.config(image=photo)
+        photoLabel.photo = photo
         
 
     def calificacionControl(self, id=0):
@@ -309,7 +327,7 @@ class MyProgram:
         alumno = Alumno(dic)
         print(dic['data'])
         if alumno.is_valid():
-            data = self._database.insert([(dic['data'][0],dic['data'][0],dic['data'][1],dic['data'][2])],'ESTUDIANTE',4)
+            data = self._database.insert([(dic['data'][0],dic['data'][0],dic['data'][1],dic['data'][2],dic['data'][3],dic['data'][4],dic['data'][5],dic['data'][6],dic['data'][7])],'ESTUDIANTE',9)
             messagebox.showinfo(title='Informacion', message=data)
             self._estudiantes = self._database.consultar('ESTUDIANTE')
     #end method
