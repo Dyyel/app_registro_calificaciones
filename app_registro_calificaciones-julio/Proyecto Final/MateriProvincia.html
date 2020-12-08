@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_b28da2e9f161400194d8ec44ca6f6a5d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_b28da2e9f161400194d8ec44ca6f6a5d" ></div>
+        
+</body>
+<script>    
+    
+            var map_b28da2e9f161400194d8ec44ca6f6a5d = L.map(
+                "map_b28da2e9f161400194d8ec44ca6f6a5d",
+                {
+                    center: [18.8269076, -70.2872627],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 8,
+                    zoomControl: true,
+                    preferCanvas: false,
+                    titles: "literal",
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0156b94ab6ab4576babb3d87c013a9a0 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_b28da2e9f161400194d8ec44ca6f6a5d);
+        
+    
+            var marker_5c9ff5b699db4cb395d121a7b83e5fe9 = L.marker(
+                [18.47186, -69.89232],
+                {}
+            ).addTo(map_b28da2e9f161400194d8ec44ca6f6a5d);
+        
+    
+            var icon_2cc898d5f28746bb853c1bfd7f68b9b3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "cadetblue", "prefix": "glyphicon"}
+            );
+            marker_5c9ff5b699db4cb395d121a7b83e5fe9.setIcon(icon_2cc898d5f28746bb853c1bfd7f68b9b3);
+        
+    
+        var popup_62c810e1f6054f739c9f954b79ead4d9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_92f2535956ba4832b5832d1db1b93049 = $(`<div id="html_92f2535956ba4832b5832d1db1b93049" style="width: 100.0%; height: 100.0%;">ANGELA</div>`)[0];
+            popup_62c810e1f6054f739c9f954b79ead4d9.setContent(html_92f2535956ba4832b5832d1db1b93049);
+        
+
+        marker_5c9ff5b699db4cb395d121a7b83e5fe9.bindPopup(popup_62c810e1f6054f739c9f954b79ead4d9)
+        ;
+
+        
+    
+    
+            marker_5c9ff5b699db4cb395d121a7b83e5fe9.bindTooltip(
+                `<div>
+                     Santo Domingo
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_eda3167e40c146b6a0959f3787a14ed1 = L.marker(
+                [18.47186, -69.89232],
+                {}
+            ).addTo(map_b28da2e9f161400194d8ec44ca6f6a5d);
+        
+    
+            var icon_86f27ba973a545adb648640323f89d0a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "darkgreen", "prefix": "glyphicon"}
+            );
+            marker_eda3167e40c146b6a0959f3787a14ed1.setIcon(icon_86f27ba973a545adb648640323f89d0a);
+        
+    
+        var popup_8b8b20f2537345d0847d63aa617e6af5 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8199ee7c014e46248933f37a466373cc = $(`<div id="html_8199ee7c014e46248933f37a466373cc" style="width: 100.0%; height: 100.0%;">ANGELA</div>`)[0];
+            popup_8b8b20f2537345d0847d63aa617e6af5.setContent(html_8199ee7c014e46248933f37a466373cc);
+        
+
+        marker_eda3167e40c146b6a0959f3787a14ed1.bindPopup(popup_8b8b20f2537345d0847d63aa617e6af5)
+        ;
+
+        
+    
+    
+            marker_eda3167e40c146b6a0959f3787a14ed1.bindTooltip(
+                `<div>
+                     Santo Domingo
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
